@@ -26,13 +26,5 @@ export default async function handler(
         `select * FROM TaskList where id = ?`,
         [id]
       );
-      if (results.rows.length > 0) {
-        const taskList = results.rows[0]
-
-        if (taskList.name == name) {
             res.status(200).json({ response: "success" });
-        }
-      }
-
-    res.status(200).json({ response: "failure" });
 }
