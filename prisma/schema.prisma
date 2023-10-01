@@ -18,8 +18,8 @@ model Tasks{
   description String
   priority  Priority
   duration  Int
-  userId  Int
-  user  User  @relation(fields: [userId], references: [id])
+  taskListId  Int
+  taskList  TaskList  @relation(fields: [taskListId], references: [id])
 }
 
 model User {
@@ -27,7 +27,17 @@ model User {
   firstName String
   lastName  String
   createdAt                         DateTime           @default(now())
+  taskLists TaskList[]
+  email String
+  isActive Boolean
+}
+
+model TaskList {
+  id        Int      @id @default(autoincrement())
+  name  String
   tasks Tasks[]
+  userId  Int
+  user  User  @relation(fields: [userId], references: [id])
 }
 
 enum Priority { 
