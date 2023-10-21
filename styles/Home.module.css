@@ -1,0 +1,44 @@
+@import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Roboto&display=swap");
+
+.main {
+  padding: 6rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.headerimage {
+  min-width: 100%;
+  height: 500px;
+  background-position: center;
+}
+
+.greeting {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.greeting h2 {
+  line-height: 16px;
+  font-family: "Amatic SC", cursive;
+  font-size: 36px;
+}
+
+.greeting p {
+  font-family: "Roboto", sans-serif;
+  padding: 10px;
+}
+.herowrapper {
+  position: relative;
+  width: 100vh;
+  height: 75vh;
+}
+
+.imagewrapper {
+  z-index: -1;
+}

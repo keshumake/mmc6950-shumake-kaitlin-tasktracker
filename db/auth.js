@@ -8,7 +8,7 @@ export async function login(username, password) {
     createConnection();
   }
   const results = await connection.execute(
-    `SELECT * FROM users WHERE username=?`,
+    `SELECT * FROM User WHERE username=?`,
     [username]
   );
   if (results.rows.length == 0) throw new Error("User not found");

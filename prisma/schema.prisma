@@ -24,12 +24,14 @@ model Tasks{
 
 model User {
   id        Int      @id @default(autoincrement())
-  firstName String
-  lastName  String
+  firstName String?
+  lastName  String?
   createdAt                         DateTime           @default(now())
   taskLists TaskList[]
-  email String
-  isActive Boolean
+  email String?
+  username String @unique
+  isActive Boolean?
+  password String
 }
 
 model TaskList {

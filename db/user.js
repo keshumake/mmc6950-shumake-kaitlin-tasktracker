@@ -9,11 +9,11 @@ export async function create(username, password) {
   }
   const passwordHash = await hash(password, 10);
   await connection.execute(
-    `INSERT INTO users (username, password) VALUES (?, ?)`,
+    `INSERT INTO User (username, password) VALUES (?, ?)`,
     [username, passwordHash]
   );
   const results = await connection.execute(
-    `SELECT * FROM users WHERE username=? LIMIT 1`,
+    `SELECT * FROM User WHERE username=? LIMIT 1`,
     [username]
   );
   if (results.rows.length == 0) throw new Error("Error inserting User");

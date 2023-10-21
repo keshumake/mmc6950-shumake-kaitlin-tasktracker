@@ -1,19 +1,24 @@
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { createConnection, connection } from "@/dbconnection";
+import { withIronSessionApiRoute } from "iron-session/next";
+import sessionOptions from "../../../config/session";
+
+
 
 
 type Data = {
   response: string;
 };
 
-export default async function handler(
+export default withIronSessionApiRoute(async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-
-      const {name, userId} = req.query;
-      if (name == null || userId == null) {
+      console.log('req', req.session)
+      const {name} = req.query;
+      const userId = req.session?.user?.id
+      if (name == null || userId == null ) {
         res.status(400).json({ response: "Parameter(s) missing" });
     }
     if (!connection) {
@@ -29,4 +34,4 @@ export default async function handler(
       );
 
     res.status(200).json({ response: taskList.rows.length > 0 ? "success" : "failure" });
-}
+}, sessionOptions);

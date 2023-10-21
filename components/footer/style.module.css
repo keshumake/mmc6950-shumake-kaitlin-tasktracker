@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Roboto&display=swap");
+
+.footer {
+  height: 150px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #483248;
+  align-items: center;
+  padding: 50px;
+  font-family: "Roboto", sans-serif;
+  color: #fff;
+}
