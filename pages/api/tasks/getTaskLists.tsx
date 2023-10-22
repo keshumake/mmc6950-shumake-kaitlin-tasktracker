@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { createConnection, connection } from "@/dbconnection";
 import { withIronSessionApiRoute } from "iron-session/next";
 import sessionOptions from "../../../config/session";
-import { TaskList, Tasks } from '@prisma/client';
+import { TaskList, Tasks } from '.prisma/client';
 
 type taskToTaskList = {
   name: string;

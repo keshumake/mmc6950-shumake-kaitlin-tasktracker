@@ -5,7 +5,7 @@ import styles from "@/styles/Home.module.css";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import { create } from 'domain';
-import { Priority } from '@prisma/client';
+import { Priority } from '.prisma/client';
 import { withIronSessionSsr } from "iron-session/next";
 import sessionOptions from "../config/session";
 
