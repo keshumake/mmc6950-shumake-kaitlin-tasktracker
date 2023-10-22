@@ -41,7 +41,7 @@ export default function Login(props) {
           process.env.NODE_ENV !== "production"
             ? "http://localhost:3000"
             : "https://mmc6950-shumake-kaitlin-tasktracker.vercel.app"
-        }/api/auth/login`,
+        }/api/login`,
         {
           method: "POST",
           headers: {
