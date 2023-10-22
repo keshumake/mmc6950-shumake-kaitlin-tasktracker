@@ -33,13 +33,20 @@ export default function Signup(props) {
     if (password !== confirmPassword) return setError("Passwords must Match");
 
     try {
-      const res = await fetch("/api/auth/signup", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
-      });
+      const res = await fetch(
+        `${
+          process.env.NODE_ENV !== "production"
+            ? "http://localhost:3000"
+            : "https://assignment1-2-theta.vercel.app"
+        }/api/auth/signup`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({ username, password }),
+        }
+      );
       if (res.status === 200) return router.push("/");
       const { error: message } = await res.json();
       setError(message);
