@@ -2,26 +2,24 @@ import Link from "next/link";
 import { useState } from "react";
 import styles from "../styles/login.module.css";
 import { useRouter } from "next/router";
-import { withIronSessionSsr } from "iron-session/next";
-import sessionOptions from "../config/session";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { slide as Menu } from "react-burger-menu";
 
-export const getServerSideProps = withIronSessionSsr(
-  async function getServerSideProps({ req }) {
-    const user = req.session.user;
-    const props = {};
-    if (user) {
-      props.user = req.session.user;
-      props.isLoggedIn = true;
-    } else {
-      props.isLoggedIn = false;
-    }
-    return { props };
-  },
-  sessionOptions
-);
+// export const getServerSideProps = withIronSessionSsr(
+//   async function getServerSideProps({ req }) {
+//     const user = req.session.user;
+//     const props = {};
+//     if (user) {
+//       props.user = req.session.user;
+//       props.isLoggedIn = true;
+//     } else {
+//       props.isLoggedIn = false;
+//     }
+//     return { props };
+//   },
+//   sessionOptions
+// );
 
 export default function Login(props) {
   const router = useRouter();
@@ -71,15 +69,13 @@ export default function Login(props) {
           </Link>
         </p>
       </Menu>
-      <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} />
+      <Header isLoggedIn={false} username={""} />
 
       <main className={styles.main}>
         <h1 className={styles.title}>Please login to use Task Tracker!</h1>
 
         <p className={styles.description}>
-          <code className={styles.code}>
-            {!props.isLoggedIn && " Not"} Logged In
-          </code>
+          <code className={styles.code}>{" Not"} Logged In</code>
         </p>
 
         <form
