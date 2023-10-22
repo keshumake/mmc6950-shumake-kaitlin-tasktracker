@@ -6,21 +6,6 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { slide as Menu } from "react-burger-menu";
 
-// export const getServerSideProps = withIronSessionSsr(
-//   async function getServerSideProps({ req }) {
-//     const user = req.session.user;
-//     const props = {};
-//     if (user) {
-//       props.user = req.session.user;
-//       props.isLoggedIn = true;
-//     } else {
-//       props.isLoggedIn = false;
-//     }
-//     return { props };
-//   },
-//   sessionOptions
-// );
-
 export default function Login(props) {
   const router = useRouter();
   const [{ username, password }, setForm] = useState({
@@ -73,10 +58,6 @@ export default function Login(props) {
 
       <main className={styles.main}>
         <h1 className={styles.title}>Please login to use Task Tracker!</h1>
-
-        <p className={styles.description}>
-          <code className={styles.code}>{" Not"} Logged In</code>
-        </p>
 
         <form
           className={[styles.card, styles.form].join(" ")}
