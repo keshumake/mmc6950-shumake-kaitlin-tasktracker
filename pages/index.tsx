@@ -5,11 +5,16 @@ import styles from "@/styles/Home.module.css";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import { create } from 'domain';
+import { Priority } from '@prisma/client';
 
 export default function Home() {
   const [list, setList] = useState(["", "", "", "", ""])
   const [taskList, setTaskList] = useState("")
   const [response, setResponse] = useState("")
+  const [description, setDescription] = useState("")
+  const [priority, setPriority] = useState("")
+  const [duration, setDuration] = useState("")
+  
 
   const handleSubmit= async () => {
     const res = await fetch(
@@ -159,9 +164,31 @@ export default function Home() {
       type="text"
       value={taskList}
       autoFocus={true}
-      onChange={e => setTaskList(e.target.value)}/>  </div>
+      onChange={e => setTaskList(e.target.value)}/>  
 
 <button onClick={ async () => {await createTaskList()}} type="submit">Submit</button>
+</div>
+<div>
+    <label>Create Task:</label>
+  <input
+      type="text"
+      value={description}
+      autoFocus={true}
+      onChange={e => setDescription(e.target.value)}/>  
+      <input
+      type="text"
+      value={duration}
+      autoFocus={true}
+      onChange={e => setDuration(e.target.value)}/>
+      <input
+      type="text"
+      value={priority}
+      autoFocus={true}
+      onChange={e => setPriority(e.target.value)}/>
+
+<button onClick={ async () => {await createTaskList()}} type="submit">Submit</button>
+</div>
+
 <label>Input To-Do List:</label>
   <div >
     
@@ -176,7 +203,9 @@ export default function Home() {
     <button onClick={ async () => {await createTaskList()}} type="submit">Save Task List</button>
     <button onClick={ async () => {await deleteTaskList()}} type="submit">Delete Task List</button>
 
-    <button onClick={ async () => {await createTask()}} type="submit">Add Tasks</button>
+    <button onClick={ async () => {await createTask()}} type="submit">Add Task</button>
+    <button onClick={ async () => {await deleteTask()}} type="submit">Remove Task</button>
+
 
 
 
