@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { createConnection, connection } from "@/dbconnection";
 import { withIronSessionApiRoute } from "iron-session/next";
 import sessionOptions from "../../../config/session";
-import { TaskList } from '.prisma/client';
+import { TaskList } from '@/types/dbTypes';
 
 
 

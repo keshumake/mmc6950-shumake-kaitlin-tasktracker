@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { createConnection, connection } from "@/dbconnection";
-import { Tasks } from '.prisma/client';
+import { Tasks } from '@/types/dbTypes';
 import { withIronSessionApiRoute } from "iron-session/next";
 import sessionOptions from "../../../config/session";
 

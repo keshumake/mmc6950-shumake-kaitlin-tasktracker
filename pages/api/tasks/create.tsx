@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { createConnection, connection } from "@/dbconnection";
 import { withIronSessionApiRoute } from "iron-session/next";
 import sessionOptions from "../../../config/session";
-import { Priority, Tasks } from '.prisma/client';
+import { Priority, Tasks } from '@/types/dbTypes';
 
 
 type Data = {
