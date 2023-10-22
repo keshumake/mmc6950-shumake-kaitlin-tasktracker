@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import Link from "next/link";
 import { slide as Menu } from "react-burger-menu";
 import styles from "@/styles/Home.module.css";
@@ -6,19 +6,52 @@ import Footer from "@/components/footer";
 import Header from "@/components/header";
 import { create } from 'domain';
 import { Priority } from '@prisma/client';
+import { withIronSessionSsr } from "iron-session/next";
+import sessionOptions from "../config/session";
+
 
 export default function Home() {
-  const [list, setList] = useState(["", "", "", "", ""])
-  const [taskList, setTaskList] = useState("")
+  const [taskListName, setTaskListName] = useState("");
+  const [taskList, setTaskList] = useState(null)
   const [response, setResponse] = useState("")
-  const [description, setDescription] = useState("")
-  const [priority, setPriority] = useState("")
-  const [duration, setDuration] = useState("")
+  const [description1, setDescription1] = useState("")
+  const [priority1, setPriority1] = useState("")
+  const [duration1, setDuration1] = useState("")
+  const [description2, setDescription2] = useState("")
+  const [priority2, setPriority2] = useState("")
+  const [duration2, setDuration2] = useState("")
+  const [description3, setDescription3] = useState("")
+  const [priority3, setPriority3] = useState("")
+  const [duration3, setDuration3] = useState("")
+  const [description4, setDescription4] = useState("")
+  const [priority4, setPriority4] = useState("")
+  const [duration4, setDuration4] = useState("")
+  const [description5, setDescription5] = useState("")
+  const [priority5, setPriority5] = useState("")
+  const [duration5, setDuration5] = useState("")
+  const [taskLists, setTaskLists] = useState([])
+  const [task, setTask] = useState(null)
+  const [tasks, setTasks] = useState([])
+
+  useEffect( () => {
+getTaskLists()
+  }, [])
+
+  const getTaskLists = async () => {
+    const res = await fetch(
+      `${process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://assignment1-2-theta.vercel.app'}/api/tasks/getTaskLists`
+    )
   
+    if (res.status !== 200) return []
+    const data = await res.json();
+    setTaskLists(data.data)
+    return data.data;
+  }
 
   const handleSubmit= async () => {
+    const tasksString = tasks.map(t => `${t.description}, ${t.priority}, ${t.duration}`).join(', ')
     const res = await fetch(
-      `${process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://assignment1-2-theta.vercel.app'}/api/chat?message=Here is my list of to-do's, can you please suggest the order I should work on these and why: ${list.join(",")}`
+      `${process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://assignment1-2-theta.vercel.app'}/api/chat?message=Here is my list of to-do's, to-do structure is task list name and a series of tasks in the following structure description, priority(HIGH, MEDIUM, LOW, NONE), duration in seconds can you please suggest the order I should work on these and why: ${taskListName + " " + tasksString}}`
     )
 
     if (res.status !== 200) return
@@ -26,27 +59,29 @@ export default function Home() {
     setResponse(data.response);
   }
 
-  const createTask = async () => {
+  const createTask = async (description, priority, duration) => {
     const res = await fetch(
-      `${process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://assignment1-2-theta.vercel.app'}/api/tasks/create?description=${description}&priority=${priority}&duration=${duration}&taskListId=${taskListId}}`
+      `${process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://assignment1-2-theta.vercel.app'}/api/tasks/create?description=${description}&priority=${priority}&duration=${duration}&taskListId=${taskList?.id as string}`
     )
 
     if (res.status !== 200) return
     const data = await res.json()
     setResponse(data.response);
+    setTasks([...tasks,data.data])
   }
 
   const createTaskList = async () => {
     const res = await fetch(
-      `${process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://assignment1-2-theta.vercel.app'}/api/tasks/createTaskList?name=${taskList}`
+      `${process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://assignment1-2-theta.vercel.app'}/api/tasks/createTaskList?name=${taskListName}`
     )
 
     if (res.status !== 200) return
     const data = await res.json()
     setResponse(data.response);
+    setTaskList(data.data);
   }
 
-  const deleteTask = async () => {
+  const deleteTask = async (id) => {
     const res = await fetch(
       `${process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://assignment1-2-theta.vercel.app'}/api/tasks/delete?id=${id}`
     )
@@ -56,7 +91,7 @@ export default function Home() {
     setResponse(data.response);
   }
 
-  const deleteTaskList = async () => {
+  const deleteTaskList = async (id) => {
     const res = await fetch(
       `${process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://assignment1-2-theta.vercel.app'}/api/tasks/deleteTaskList?id=${id}`
     )
@@ -65,66 +100,8 @@ export default function Home() {
     const data = await res.json()
     setResponse(data.response);
   }
+  console.log(taskLists)
 
-  const getTask = async () => {
-    const res = await fetch(
-      `${process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://assignment1-2-theta.vercel.app'}/api/tasks/getTask?id=${id}`
-    )
-
-    if (res.status !== 200) return
-    const data = await res.json()
-    setResponse(data.response);
-  }
-
-  const getTaskList = async () => {
-    const res = await fetch(
-      `${process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://assignment1-2-theta.vercel.app'}/api/tasks/getTaskLists`
-    )
-
-    if (res.status !== 200) return
-    const data = await res.json()
-    setResponse(data.response);
-  }
-
-  const getTasks = async () => {
-    const res = await fetch(
-      `${process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://assignment1-2-theta.vercel.app'}/api/tasks/getTasks?userId=${userId}`
-    )
-
-    if (res.status !== 200) return
-    const data = await res.json()
-    setResponse(data.response);
-  }
-
-  const updateTask = async () => {
-    const res = await fetch(
-      `${process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://assignment1-2-theta.vercel.app'}/api/tasks/update?description=${description}&priority=${priority}&duration=${duration}&taskListId=${taskListId}}`
-    )
-
-    if (res.status !== 200) return
-    const data = await res.json()
-    setResponse(data.response);
-  }
-
-  const updateTaskList = async () => {
-    const res = await fetch(
-      `${process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://assignment1-2-theta.vercel.app'}/api/tasks/updateTaskList?id=${id}&name=${name}`
-    )
-
-    if (res.status !== 200) return
-    const data = await res.json()
-    setResponse(data.response);
-  }
-
-  const updateList = (index: number, value: string) => {
-    const updatedList = [...list];
-    updatedList[index] = value;
-    setList(updatedList);  
-  }
-
-  useEffect(() => {
-    setList(list)
-  }, [list])
 
   return (
          <>
@@ -139,21 +116,6 @@ export default function Home() {
             Login
           </Link>
         </p>
-        <p>
-          <Link className="menu-item" href="/search">
-            Search
-          </Link>
-        </p>
-        <p>
-          <Link className="menu-item" href="/favorite">
-            Favorites
-          </Link>
-        </p>
-        <p>
-          <Link className="menu-item" href="/about">
-            About
-          </Link>
-        </p>
       </Menu>
       <Header></Header>
       <main>
@@ -162,51 +124,130 @@ export default function Home() {
     <label>Create Task List:</label>
   <input
       type="text"
-      value={taskList}
+      value={taskListName}
       autoFocus={true}
-      onChange={e => setTaskList(e.target.value)}/>  
+      onChange={e => setTaskListName(e.target.value)}/>  
 
 <button onClick={ async () => {await createTaskList()}} type="submit">Submit</button>
 </div>
 <div>
     <label>Create Task:</label>
-  <input
+    <input
       type="text"
-      value={description}
+      value={description1}
       autoFocus={true}
-      onChange={e => setDescription(e.target.value)}/>  
+      onChange={e => setDescription1(e.target.value)}/>  
+        <input
+      type="text"
+      value={priority1}
+      autoFocus={true}
+      onChange={e => setPriority1(e.target.value)}/>
       <input
-      type="text"
-      value={duration}
+      type="number"
+      value={duration1}
       autoFocus={true}
-      onChange={e => setDuration(e.target.value)}/>
-      <input
-      type="text"
-      value={priority}
-      autoFocus={true}
-      onChange={e => setPriority(e.target.value)}/>
+      onChange={e => setDuration1(e.target.value)}/>
 
-<button onClick={ async () => {await createTaskList()}} type="submit">Submit</button>
+<button onClick={ async () => {await createTask(description1, priority1, duration1)}} type="submit">Create Task</button>
 </div>
-
-<label>Input To-Do List:</label>
-  <div >
-    
-    {list.map((listitem, index) => {return <input
-      key = {index}
+<div>
+    <label>Create Task:</label>
+    <input
       type="text"
-      value={list[index]}
+      value={description2}
       autoFocus={true}
-      onChange={e => updateList(index, e.target.value)}/>})}
-    
+      onChange={e => setDescription2(e.target.value)}/>  
+        <input
+      type="text"
+      value={priority2}
+      autoFocus={true}
+      onChange={e => setPriority2(e.target.value)}/>
+      <input
+      type="number"
+      value={duration2}
+      autoFocus={true}
+      onChange={e => setDuration2(e.target.value)}/>
+
+<button onClick={ async () => {await createTask(description2, priority2, duration2)}} type="submit">Create Task</button>
+</div>
+<div>
+    <label>Create Task:</label>
+    <input
+      type="text"
+      value={description3}
+      autoFocus={true}
+      onChange={e => setDescription3(e.target.value)}/>  
+        <input
+      type="text"
+      value={priority3}
+      autoFocus={true}
+      onChange={e => setPriority3(e.target.value)}/>
+      <input
+      type="number"
+      value={duration3}
+      autoFocus={true}
+      onChange={e => setDuration3(e.target.value)}/>
+
+<button onClick={ async () => {await createTask(description3, priority3, duration3)}} type="submit">Create Task</button>
+</div>
+<div>
+    <label>Create Task:</label>
+    <input
+      type="text"
+      value={description4}
+      autoFocus={true}
+      onChange={e => setDescription4(e.target.value)}/>  
+        <input
+      type="text"
+      value={priority4}
+      autoFocus={true}
+      onChange={e => setPriority4(e.target.value)}/>
+      <input
+      type="number"
+      value={duration4}
+      autoFocus={true}
+      onChange={e => setDuration4(e.target.value)}/>
+
+<button onClick={ async () => {await createTask(description4, priority4, duration4)}} type="submit">Create Task</button>
+</div>
+<div>
+    <label>Create Task:</label>
+    <input
+      type="text"
+      value={description5}
+      autoFocus={true}
+      onChange={e => setDescription5(e.target.value)}/>  
+        <input
+      type="text"
+      value={priority5}
+      autoFocus={true}
+      onChange={e => setPriority5(e.target.value)}/>
+      <input
+      type="number"
+      value={duration5}
+      autoFocus={true}
+      onChange={e => setDuration5(e.target.value)}/>
+
+<button onClick={ async () => {await createTask(description5, priority5, duration5)}} type="submit">Create Task</button>
+</div>
+  <div >
     <button onClick={ async () => {await handleSubmit()}} type="submit">Generate Recommendations</button>
-    <button onClick={ async () => {await createTaskList()}} type="submit">Save Task List</button>
-    <button onClick={ async () => {await deleteTaskList()}} type="submit">Delete Task List</button>
 
-    <button onClick={ async () => {await createTask()}} type="submit">Add Task</button>
-    <button onClick={ async () => {await deleteTask()}} type="submit">Remove Task</button>
+    {taskLists.map((taskList, index) => {return <div>
+      <div>
+       {
+        taskList.name + ""
 
+       }
+            <button onClick={ async () => {await deleteTaskList(taskList.id)}} type="submit">Delete Task List</button>
 
+       {(taskList?.tasks ?? []).map(listitem => <div>{listitem.description + " " + listitem.priority + " " + listitem.duration}
+                 <button onClick={ async () => {await deleteTask(listitem.id)}} type="submit">Delete Task</button>
+        </div>)}
+       </div>
+
+    </div> 
+  })}
 
 
   </div>

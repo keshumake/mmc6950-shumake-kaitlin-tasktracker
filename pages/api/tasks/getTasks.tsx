@@ -14,7 +14,7 @@ export default withIronSessionApiRoute(async function handler(
   res: NextApiResponse<Data>
 ) {
 
-  const userId = req.session?.user?.id
+  const userId = (req.session as any).user?.id
   if (userId == null) {
         res.status(400).json({ response: "Parameter(s) missing", data: [] });
     }

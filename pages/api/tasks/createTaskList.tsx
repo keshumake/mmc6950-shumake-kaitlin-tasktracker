@@ -3,12 +3,14 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { createConnection, connection } from "@/dbconnection";
 import { withIronSessionApiRoute } from "iron-session/next";
 import sessionOptions from "../../../config/session";
+import { TaskList } from '@prisma/client';
 
 
 
 
 type Data = {
   response: string;
+  data?: TaskList | null,
 };
 
 export default withIronSessionApiRoute(async function handler(
@@ -17,7 +19,7 @@ export default withIronSessionApiRoute(async function handler(
 ) {
       console.log('req', req.session)
       const {name} = req.query;
-      const userId = req.session?.user?.id
+      const userId = (req.session as any).user?.id
       if (name == null || userId == null ) {
         res.status(400).json({ response: "Parameter(s) missing" });
     }
@@ -33,5 +35,5 @@ export default withIronSessionApiRoute(async function handler(
         [name, userId]
       );
 
-    res.status(200).json({ response: taskList.rows.length > 0 ? "success" : "failure" });
+    res.status(200).json({ response: taskList.rows.length > 0 ? "success" : "failure", data: taskList.rows.length > 0 ? taskList.rows[0] : null });
 }, sessionOptions);
