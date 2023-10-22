@@ -40,7 +40,7 @@ export default function Login(props) {
         `${
           process.env.NODE_ENV !== "production"
             ? "http://localhost:3000"
-            : "https://assignment1-2-theta.vercel.app"
+            : "https://mmc6950-shumake-kaitlin-tasktracker.vercel.app"
         }/api/auth/login`,
         {
           method: "POST",

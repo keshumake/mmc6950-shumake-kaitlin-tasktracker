@@ -39,7 +39,7 @@ getTaskLists()
 
   const getTaskLists = async () => {
     const res = await fetch(
-      `${process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://assignment1-2-theta.vercel.app'}/api/tasks/getTaskLists`
+      `${process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://mmc6950-shumake-kaitlin-tasktracker.vercel.app'}/api/tasks/getTaskLists`
     )
   
     if (res.status !== 200) return []
@@ -51,7 +51,7 @@ getTaskLists()
   const handleSubmit= async () => {
     const tasksString = tasks.map(t => `${t.description}, ${t.priority}, ${t.duration}`).join(', ')
     const res = await fetch(
-      `${process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://assignment1-2-theta.vercel.app'}/api/chat?message=Here is my list of to-do's, to-do structure is task list name and a series of tasks in the following structure description, priority(HIGH, MEDIUM, LOW, NONE), duration in seconds can you please suggest the order I should work on these and why: ${taskListName + " " + tasksString}}`
+      `${process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://mmc6950-shumake-kaitlin-tasktracker.vercel.app'}/api/chat?message=Here is my list of to-do's, to-do structure is task list name and a series of tasks in the following structure description, priority(HIGH, MEDIUM, LOW, NONE), duration in seconds can you please suggest the order I should work on these and why: ${taskListName + " " + tasksString}}`
     )
 
     if (res.status !== 200) return
@@ -61,7 +61,7 @@ getTaskLists()
 
   const createTask = async (description, priority, duration) => {
     const res = await fetch(
-      `${process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://assignment1-2-theta.vercel.app'}/api/tasks/create?description=${description}&priority=${priority}&duration=${duration}&taskListId=${taskList?.id as string}`
+      `${process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://mmc6950-shumake-kaitlin-tasktracker.vercel.app'}/api/tasks/create?description=${description}&priority=${priority}&duration=${duration}&taskListId=${taskList?.id as string}`
     )
 
     if (res.status !== 200) return
@@ -72,7 +72,7 @@ getTaskLists()
 
   const createTaskList = async () => {
     const res = await fetch(
-      `${process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://assignment1-2-theta.vercel.app'}/api/tasks/createTaskList?name=${taskListName}`
+      `${process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://mmc6950-shumake-kaitlin-tasktracker.vercel.app'}/api/tasks/createTaskList?name=${taskListName}`
     )
 
     if (res.status !== 200) return
@@ -83,7 +83,7 @@ getTaskLists()
 
   const deleteTask = async (id) => {
     const res = await fetch(
-      `${process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://assignment1-2-theta.vercel.app'}/api/tasks/delete?id=${id}`
+      `${process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://mmc6950-shumake-kaitlin-tasktracker.vercel.app'}/api/tasks/delete?id=${id}`
     )
 
     if (res.status !== 200) return
@@ -93,7 +93,7 @@ getTaskLists()
 
   const deleteTaskList = async (id) => {
     const res = await fetch(
-      `${process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://assignment1-2-theta.vercel.app'}/api/tasks/deleteTaskList?id=${id}`
+      `${process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://mmc6950-shumake-kaitlin-tasktracker.vercel.app'}/api/tasks/deleteTaskList?id=${id}`
     )
 
     if (res.status !== 200) return
