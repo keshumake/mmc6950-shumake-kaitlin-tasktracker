@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Arimo&family=Bitter&display=swap");
 
 .main {
   padding: 6rem;
@@ -9,36 +9,57 @@
   justify-content: center;
 }
 
-.headerimage {
-  min-width: 100%;
-  height: 500px;
-  background-position: center;
+.main p {
+  font-family: "Arimo", sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+  padding-bottom: 10px;
+}
+
+.maincontent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main button {
+  background-color: #f2d785;
+  border: 1px solid black;
+  font-family: "Bitter", serif;
+  padding: 5px 10px;
+  font-size: 14px;
 }
 
 .greeting {
   width: 100%;
+  padding: 20px 0px;
   display: flex;
   flex-direction: column;
+}
+
+.greeting h1 {
+  font-family: "Bitter", sans-serif;
+  font-size: 32px;
+  letter-spacing: 1px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+.createTaskList {
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+}
+
+.submitTaskList {
+  display: flex;
+  flex-direction: row;
   align-items: center;
-  margin-top: 50px;
+  justify-content: space-between;
 }
-
-.greeting h2 {
-  line-height: 16px;
-  font-family: "Amatic SC", cursive;
-  font-size: 36px;
+.createTaskList label {
+  font-family: "Bitter", serif;
 }
-
-.greeting p {
-  font-family: "Roboto", sans-serif;
-  padding: 10px;
-}
-.herowrapper {
-  position: relative;
-  width: 100vh;
-  height: 75vh;
-}
-
-.imagewrapper {
-  z-index: -1;
+.createTaskList input {
+  border: 2px black solid;
 }

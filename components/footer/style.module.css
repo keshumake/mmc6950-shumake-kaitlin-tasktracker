@@ -1,12 +1,13 @@
-@import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Roboto&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Arimo&family=Bitter&display=swap');
+
 
 .footer {
-  height: 150px;
+  height: 100px;
   display: flex;
   justify-content: space-between;
-  background-color: #483248;
+  background-color: #A67968;
   align-items: center;
   padding: 50px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Arimo", sans-serif;
   color: #fff;
 }

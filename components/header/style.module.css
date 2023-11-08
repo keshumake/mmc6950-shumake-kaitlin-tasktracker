@@ -1,7 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Arimo&family=Bitter&display=swap");
 
 .container a {
-  font-family: "Roboto", sans-serif;
+  font-family: "Bitter", serif;
   letter-spacing: 3px;
 }
 
@@ -10,9 +10,10 @@
   gap: 12px;
   height: 150px;
   justify-content: left;
-  background-color: #483248;
+  background-color: #a67968;
   align-items: center;
   color: #fff;
+  border-bottom: #188c8c 10px solid;
 }
 
 .headertitle {
@@ -21,9 +22,7 @@
   align-items: center;
 }
 
-.headertitle h1 {
-  font-family: "Amatic SC", cursive;
-  font-size: 45px;
+.headerimage {
   padding: 10px 25px;
   letter-spacing: 5px;
 }
@@ -33,7 +32,7 @@
 }
 
 .loggedin {
-  font-family: "Roboto", sans-serif;
+  font-family: "Arimo", sans-serif;
   color: #fff;
   padding-left: 250px;
 }

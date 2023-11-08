@@ -1,13 +1,15 @@
 import { useState, useEffect, useMemo } from 'react'
 import Link from "next/link";
 import { slide as Menu } from "react-burger-menu";
-import styles from "@/styles/Home.module.css";
-import Footer from "@/components/footer";
+import styles from "../styles/Home.module.css";
 import Header from "@/components/header";
+import Footer from "@/components/footer";
 import { create } from 'domain';
 import { Priority } from '@/types/dbTypes';
 import { withIronSessionSsr } from "iron-session/next";
 import sessionOptions from "../config/session";
+import headerImage from "../components/filefolder.jpg";
+import Image from 'next/image';
 
 
 export default function Home() {
@@ -118,9 +120,20 @@ getTaskLists()
         </p>
       </Menu>
       <Header></Header>
-      <main>
-<div>
-  <div>
+      <main className={styles.main}>
+<div className={styles.maincontent}>
+  <div className={styles.headerimg}><Image src={headerImage} height={600} width={800} alt="File Folder"></Image></div>
+  <div className={styles.greeting}>
+    <h1>Welcome to Task Tracker!</h1>
+    <p>We’re delighted to welcome you to a platform designed to simplify your life and enhance your productivity. Whether you’re managing personal tasks, collaborating with a team, or simply striving to stay organized, you’ve come to the right place.</p>
+
+<p>With our intuitive interface and powerful features, you’ll have the ability to streamline your workflow, set and achieve your goals, and gain a better grasp of your daily responsibilities.</p>
+
+<p>Please click the menu above to create an account or login, and start getting organized!</p>
+  </div>
+  <div className={styles.createTaskList}>
+    <p>Please type in the desired task list name and submit before adding tasks.</p>
+    <div className={styles.submitTaskList}>
     <label>Create Task List:</label>
   <input
       type="text"
@@ -130,7 +143,8 @@ getTaskLists()
 
 <button onClick={ async () => {await createTaskList()}} type="submit">Submit</button>
 </div>
-<div>
+</div>
+<div className={styles.createTask}>
     <label>Create Task:</label>
     <input
       type="text"
