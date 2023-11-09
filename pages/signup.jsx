@@ -6,7 +6,6 @@ import styles from "../styles/signup.module.css";
 import { useRouter } from "next/router";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-const IMAGE_URL = "/bwpug.jpg";
 import { slide as Menu } from "react-burger-menu";
 
 export default function Signup(props) {
@@ -71,15 +70,7 @@ export default function Signup(props) {
       <Header></Header>
 
       <main className={styles.main}>
-        <div className={styles.image}>
-          <Image
-            src={IMAGE_URL}
-            width={500}
-            height={650}
-            objectfit="cover"
-            objectposition="center"
-          ></Image>
-        </div>
+      
         <div className={styles.maincontent}>
           <h1 className={styles.title}>
             Welcome to the Task Tracker Signup Page!
@@ -124,7 +115,7 @@ export default function Signup(props) {
             {error && <p>{error}</p>}
           </form>
           <Link href="/login">
-            <p className={styles.login}>Login instead?</p>
+            <button className={styles.login}>Login instead?</button>
           </Link>
         </div>
       </main>

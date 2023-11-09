@@ -83,7 +83,7 @@ export default function Login(props) {
           {error && <p>{error}</p>}
         </form>
         <Link href="/signup">
-          <p className={styles.signup}>Sign up instead?</p>
+          <button className={styles.signup}>Sign up instead?</button>
         </Link>
       </main>
       <Footer></Footer>
