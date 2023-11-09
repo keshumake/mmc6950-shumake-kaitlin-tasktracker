@@ -5,7 +5,23 @@ import { useRouter } from "next/router";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { slide as Menu } from "react-burger-menu";
+import { withIronSessionSsr } from "iron-session/next";
+import sessionOptions from "../config/session";
 
+export const getServerSideProps = withIronSessionSsr(
+  async function getServerSideProps({ req }) {
+    const user = req.session.user;
+    const props = {};
+    if (user) {
+      props.username = user.username;
+      props.isLoggedIn = true;
+    } else {
+      props.isLoggedIn = false;
+    }
+    return { props };
+  },
+  sessionOptions
+);
 export default function Login(props) {
   const router = useRouter();
   const [{ username, password }, setForm] = useState({
@@ -54,7 +70,7 @@ export default function Login(props) {
           </Link>
         </p>
       </Menu>
-      <Header isLoggedIn={false} username={""} />
+      <Header isLoggedIn={props.isLoggedIn} username={props.username} />
 
       <main className={styles.main}>
         <h1 className={styles.title}>Please login to use Task Tracker!</h1>
