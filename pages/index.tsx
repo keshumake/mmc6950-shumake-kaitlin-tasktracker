@@ -144,6 +144,8 @@ getTaskLists()
 <button onClick={ async () => {await createTaskList()}} type="submit">Submit</button>
 </div>
 </div>
+<div className={styles.taskContainer}>
+  <p>Please create tasks by inputting the following information in the appropriate fields: Task Name, Priority level -- HIGH, MEDIUM, LOW, NONE -- and time needed in minutes.</p>
 <div className={styles.createTask}>
     <label>Create Task:</label>
     <input
@@ -164,7 +166,7 @@ getTaskLists()
 
 <button onClick={ async () => {await createTask(description1, priority1, duration1)}} type="submit">Create Task</button>
 </div>
-<div>
+<div className={styles.createTask}>
     <label>Create Task:</label>
     <input
       type="text"
@@ -184,7 +186,7 @@ getTaskLists()
 
 <button onClick={ async () => {await createTask(description2, priority2, duration2)}} type="submit">Create Task</button>
 </div>
-<div>
+<div className={styles.createTask}>
     <label>Create Task:</label>
     <input
       type="text"
@@ -204,7 +206,7 @@ getTaskLists()
 
 <button onClick={ async () => {await createTask(description3, priority3, duration3)}} type="submit">Create Task</button>
 </div>
-<div>
+<div className={styles.createTask}>
     <label>Create Task:</label>
     <input
       type="text"
@@ -224,7 +226,7 @@ getTaskLists()
 
 <button onClick={ async () => {await createTask(description4, priority4, duration4)}} type="submit">Create Task</button>
 </div>
-<div>
+<div className={styles.createTask}>
     <label>Create Task:</label>
     <input
       type="text"
@@ -244,7 +246,8 @@ getTaskLists()
 
 <button onClick={ async () => {await createTask(description5, priority5, duration5)}} type="submit">Create Task</button>
 </div>
-  <div >
+
+  <div className={styles.recommendations}>
     <button onClick={ async () => {await handleSubmit()}} type="submit">Generate Recommendations</button>
 
     {taskLists.map((taskList, index) => {return <div>
@@ -269,7 +272,7 @@ getTaskLists()
 <div>
   {response}
 </div>
-
+</div>
 </main>
 <Footer></Footer>
     </>
