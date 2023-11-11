@@ -15,6 +15,8 @@
     "incremental": true,
     "noImplicitAny": false,
     "paths": {
+      "@/components/*": ["./components/*"],
+      "@/styles/*": ["./styles/*"],
       "@/*": ["./*"]
     }
   },
