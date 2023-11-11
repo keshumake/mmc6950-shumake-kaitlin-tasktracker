@@ -31,5 +31,5 @@ export default withIronSessionApiRoute(async function handler(
       );
       
 
-    res.status(200).json({ response: results.rows.length > 0 ? "failure" : "success" });
+    res.status(200).json({ response: results.rows.length > 0 ? "Failure" : "Tasks Deleted" });
 }, sessionOptions);

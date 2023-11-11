@@ -27,7 +27,6 @@ async function login(req, res) {
     console.log("...otherFields", otherFields);
 
     req.session.user = otherFields;
-    console.log('req', req.session.user)
     await req.session.save();
     res.status(200).end();
   } catch (err) {

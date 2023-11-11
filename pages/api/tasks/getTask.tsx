@@ -28,5 +28,5 @@ export default withIronSessionApiRoute(async function handler(
       );
      
 
-    res.status(200).json({ response: results.rows.length > 0 ? "success" : "failure", data: results.rows[0] as Tasks });
+    res.status(200).json({ response: results.rows.length > 0 ? "Success" : "Failure", data: results.rows[0] as Tasks });
 }, sessionOptions);

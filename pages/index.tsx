@@ -72,7 +72,7 @@ export default function Home(props) {
         process.env.NODE_ENV !== "production"
           ? "http://localhost:3000"
           : "https://mmc6950-shumake-kaitlin-tasktracker.vercel.app"
-      }/api/chat?message=Here is my list of to-do's, to-do structure is task list name and a series of tasks in the following structure description, priority(HIGH, MEDIUM, LOW, NONE), duration in seconds can you please suggest the order I should work on these and why: ${
+      }/api/chat?message=Here is my list of to-do's, to-do structure is task list name and a series of tasks in the following structure description, priority(HIGH, MEDIUM, LOW, NONE), duration in minutes can you please suggest the order I should work on these and why: ${
         taskListName + " " + tasksString
       }}`
     );

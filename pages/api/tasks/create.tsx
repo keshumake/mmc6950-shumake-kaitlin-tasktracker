@@ -32,5 +32,5 @@ export default withIronSessionApiRoute(async function handler(
         [description, priority as Priority, Number(duration), Number(taskListId)]
       );
 
-    res.status(200).json({ response: task.rows.length > 0 ? "success" : "failure", data: task.rows.length > 0 ? task.rows[0] : null });
+    res.status(200).json({ response: task.rows.length > 0 ? "Created" : "Failure", data: task.rows.length > 0 ? task.rows[0] : null });
 }, sessionOptions);

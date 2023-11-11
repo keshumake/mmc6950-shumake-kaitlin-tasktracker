@@ -48,6 +48,6 @@ type Data = {
        
         console.log("data ", data)
   
-      res.status(200).json({ response: data.length > 0 ? "success" : "failure", data: data as unknown as taskToTaskList[] ?? [] });
+      res.status(200).json({ response: data.length > 0 ? "Success" : "Failure", data: data as unknown as taskToTaskList[] ?? [] });
   }, sessionOptions);
   
