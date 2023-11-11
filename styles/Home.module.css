@@ -89,6 +89,38 @@
   align-items: center;
 }
 
-.recommendations {
+.taskListResult {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  font-family: "Bitter", serif;
+}
+
+.taskResult,
+.responseContainer {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  font-family: "Bitter", serif;
+}
+
+.taskListResult,
+.taskResult p {
+  margin-bottom: 0px 20px;
+}
+
+.response {
   margin-top: 25px;
+  font-size: 18px;
+  padding: 50px;
+  font-family: "Bitter", serif;
+  border: 10px solid #188c8c;
+}
+
+.resultButton {
+  padding-left: 20px;
 }

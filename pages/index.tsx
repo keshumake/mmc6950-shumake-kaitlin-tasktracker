@@ -380,12 +380,15 @@ export default function Home(props) {
                   >
                     Generate Recommendations
                   </button>
+                  </div>
 
+
+                  <div className="responseContainer">  
                   {taskLists.map((taskList, index) => {
                     return (
                       <div>
-                        <div>
-                          {taskList.name + ""}
+                        <div className={styles.taskListResult}>
+                          {"Task List: " + taskList.name + ""}
                           <button
                             onClick={async () => {
                               await deleteTaskList(taskList.id);
@@ -396,13 +399,14 @@ export default function Home(props) {
                           </button>
 
                           {(taskList?.tasks ?? []).map((listitem) => (
-                            <div>
-                              {listitem.description +
-                                " " +
+                            <div className={styles.taskResult}>
+                              {"Task: " + 
+                              listitem.description +
+                                ", " +
                                 listitem.priority +
-                                " " +
+                                ", " +
                                 listitem.duration}
-                              <button
+                              <button className={styles.resultButton}
                                 onClick={async () => {
                                   await deleteTask(listitem.id);
                                 }}
@@ -418,7 +422,7 @@ export default function Home(props) {
                   })}
                 </div>
               </div>
-              <div>{response}</div>{" "}
+              <div className={styles.response}>{response}</div>{" "}
             </>
           )}
         </div>
