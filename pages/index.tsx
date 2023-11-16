@@ -12,7 +12,10 @@ import Image from "next/image";
 export const getServerSideProps = withIronSessionSsr(
   async function getServerSideProps({ req }) {
     const user = req.session.user;
-    const props = {};
+    const props = {
+      username: '',
+      isLoggedIn: null
+      }      
     if (user) {
       props.username = user.username;
       props.isLoggedIn = true;
@@ -154,6 +157,11 @@ export default function Home(props) {
         <p>
           <Link className="menu-item" href="/login">
             Login
+          </Link>
+        </p>
+        <p>
+          <Link className="menu-item" href="/signup">
+            Sign Up
           </Link>
         </p>
       </Menu>

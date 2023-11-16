@@ -64,11 +64,15 @@ export default function Signup(props) {
             Login
           </Link>
         </p>
+        <p>
+          <Link className="menu-item" href="/signup">
+            Sign Up
+          </Link>
+        </p>
       </Menu>
       <Header></Header>
 
       <main className={styles.main}>
-      
         <div className={styles.maincontent}>
           <h1 className={styles.title}>
             Welcome to the Task Tracker Signup Page!

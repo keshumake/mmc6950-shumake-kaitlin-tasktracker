@@ -69,6 +69,11 @@ export default function Login(props) {
             Login
           </Link>
         </p>
+        <p>
+          <Link className="menu-item" href="/signup">
+            Sign Up
+          </Link>
+        </p>
       </Menu>
       <Header isLoggedIn={props.isLoggedIn} username={props.username} />
 
