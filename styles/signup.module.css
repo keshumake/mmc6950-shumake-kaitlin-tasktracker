@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Arimo&family=Bitter&display=swap");
 
-.main {
+.main, .maincontent {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
