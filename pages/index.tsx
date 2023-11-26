@@ -168,14 +168,18 @@ export default function Home(props) {
       <Header isLoggedIn={props.isLoggedIn} username={props.username}></Header>
       <main className={styles.main}>
         <div className={styles.maincontent}>
-          <div className={styles.headerimg}>
+        <div className={styles.headerimg}>
+          <div className={styles.imgwrapper}>
             <Image
+              priority
               src={headerImage}
-              height={600}
-              width={800}
               alt="File Folder"
+              layout="fill"
+              objectFit="cover"
+          objectPosition="center"
             ></Image>
-          </div>
+            </div>
+            </div>
           <div className={styles.greeting}>
             <h1>Welcome to Task Tracker!</h1>
             <p>

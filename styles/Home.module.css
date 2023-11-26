@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Arimo&family=Bitter&display=swap");
 
 .main {
-  padding: 6rem;
+  position: relative;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -16,10 +16,23 @@
   padding-bottom: 10px;
 }
 
+.headerimg {
+  position: relative;
+  width: 75vw;
+  height: 75vh;
+}
+
+.imgwrapper {
+  z-index: -1;
+}
+
 .maincontent {
+  padding: 0rem 6rem;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .main button {
@@ -124,3 +137,4 @@
 .resultButton {
   padding-left: 20px;
 }
+
