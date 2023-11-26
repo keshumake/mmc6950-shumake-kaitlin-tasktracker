@@ -148,6 +148,7 @@ export default function Home(props) {
 
   return (
     <>
+    <title>Task Tracker</title>
       <Menu right>
         <p>
           <Link className="menu-item" href="/">

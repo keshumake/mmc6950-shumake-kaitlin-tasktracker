@@ -76,7 +76,7 @@ export default function Login(props) {
         </p>
       </Menu>
       <Header isLoggedIn={props.isLoggedIn} username={props.username} />
-
+      <title>Task Tracker</title>
       <main className={styles.main}>
         <h1 className={styles.title}>Please login to use Task Tracker!</h1>
 

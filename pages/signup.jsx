@@ -71,7 +71,7 @@ export default function Signup(props) {
         </p>
       </Menu>
       <Header></Header>
-
+      <title>Task Tracker</title>
       <main className={styles.main}>
         <div className={styles.maincontent}>
           <h1 className={styles.title}>
