@@ -14,7 +14,7 @@ export default function Header(props) {
     <header className={styles.container}>
       <div className={styles.headertitle}>
         <Link href="/">
-          <Image className={styles.headerimage} src={logoWithText} width={175} height={132}></Image>
+          <Image className={styles.headerimage} src={logoWithText} width={175} height={132} alt="Task Tracker Logo"></Image>
         </Link>
       </div>
       {props.isLoggedIn ? (
