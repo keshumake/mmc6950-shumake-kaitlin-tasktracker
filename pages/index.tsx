@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import Link from "next/link";
 import { slide as Menu } from "react-burger-menu";
 import styles from "../styles/Home.module.css";
@@ -8,14 +8,13 @@ import { withIronSessionSsr } from "iron-session/next";
 import sessionOptions from "../config/session";
 import headerImage from "../components/filefolder.jpg";
 import Image from "next/image";
+import { useRouter } from "next/router";
+
 
 export const getServerSideProps = withIronSessionSsr(
   async function getServerSideProps({ req }) {
     const user = req.session.user;
-    const props = {
-      username: '',
-      isLoggedIn: null
-      }      
+    const props = {};
     if (user) {
       props.username = user.username;
       props.isLoggedIn = true;
@@ -27,6 +26,8 @@ export const getServerSideProps = withIronSessionSsr(
   sessionOptions
 );
 export default function Home(props) {
+  const router = useRouter();
+
   const [taskListName, setTaskListName] = useState("");
   const [taskList, setTaskList] = useState(null);
   const [response, setResponse] = useState("");
@@ -47,6 +48,8 @@ export default function Home(props) {
   const [duration5, setDuration5] = useState("");
   const [taskLists, setTaskLists] = useState([]);
   const [tasks, setTasks] = useState([]);
+  const [hasRecommendationBeenGenerated, setHasRecommendationBeenGenerated] =
+    useState(false);
   useEffect(() => {
     getTaskLists();
   }, []);
@@ -66,8 +69,12 @@ export default function Home(props) {
     return data.data;
   };
 
-  const handleSubmit = async () => {
-    const tasksString = tasks
+  const generateRecommendations = async (
+    listName = taskListName,
+    tasksArr = tasks
+  ) => {
+    setHasRecommendationBeenGenerated(true);
+    const tasksString = tasksArr
       .map((t) => `${t.description}, ${t.priority}, ${t.duration}`)
       .join(", ");
     const res = await fetch(
@@ -76,7 +83,7 @@ export default function Home(props) {
           ? "http://localhost:3000"
           : "https://mmc6950-shumake-kaitlin-tasktracker.vercel.app"
       }/api/chat?message=Here is my list of to-do's, to-do structure is task list name and a series of tasks in the following structure description, priority(HIGH, MEDIUM, LOW, NONE), duration in minutes can you please suggest the order I should work on these and why: ${
-        taskListName + " " + tasksString
+        listName + " " + tasksString
       }}`
     );
 
@@ -99,6 +106,7 @@ export default function Home(props) {
     if (res.status !== 200) return;
     const data = await res.json();
     setResponse(data.response);
+    await getTaskLists();
     setTasks([...tasks, data.data]);
   };
 
@@ -115,6 +123,7 @@ export default function Home(props) {
     const data = await res.json();
     setResponse(data.response);
     setTaskList(data.data);
+    await getTaskLists();
   };
 
   const deleteTask = async (id) => {
@@ -128,6 +137,7 @@ export default function Home(props) {
 
     if (res.status !== 200) return;
     const data = await res.json();
+    await getTaskLists();
     setResponse(data.response);
   };
 
@@ -142,13 +152,12 @@ export default function Home(props) {
 
     if (res.status !== 200) return;
     const data = await res.json();
+    await getTaskLists();
     setResponse(data.response);
   };
-  console.log(taskLists);
 
   return (
     <>
-    <title>Task Tracker</title>
       <Menu right>
         <p>
           <Link className="menu-item" href="/">
@@ -169,18 +178,14 @@ export default function Home(props) {
       <Header isLoggedIn={props.isLoggedIn} username={props.username}></Header>
       <main className={styles.main}>
         <div className={styles.maincontent}>
-        <div className={styles.headerimg}>
-          <div className={styles.imgwrapper}>
+          <div className={styles.headerimg}>
             <Image
-              priority
               src={headerImage}
+              height={600}
+              width={800}
               alt="File Folder"
-              layout="fill"
-              objectFit="cover"
-          objectPosition="center"
             ></Image>
-            </div>
-            </div>
+          </div>
           <div className={styles.greeting}>
             <h1>Welcome to Task Tracker!</h1>
             <p>
@@ -223,7 +228,7 @@ export default function Home(props) {
                     }}
                     type="submit"
                   >
-                    Submit
+                    Create
                   </button>
                 </div>
               </div>
@@ -233,6 +238,11 @@ export default function Home(props) {
                   the appropriate fields: Task Name, Priority level -- HIGH,
                   MEDIUM, LOW, NONE -- and time needed in minutes.
                 </p>
+                <div className={styles.labels}>
+                  <h1>Task Name</h1>
+                  <h1>Priority Level</h1>
+                  <h1>Duration Needed</h1>
+                </div>
                 <div className={styles.createTask}>
                   <label>Create Task:</label>
                   <input
@@ -385,18 +395,8 @@ export default function Home(props) {
                 </div>
 
                 <div className={styles.recommendations}>
-                  <button
-                    onClick={async () => {
-                      await handleSubmit();
-                    }}
-                    type="submit"
-                  >
-                    Generate Recommendations
-                  </button>
-                  </div>
-
-
-                  <div className="responseContainer">  
+                </div>
+                <div className="responseContainer">
                   {taskLists.map((taskList, index) => {
                     return (
                       <div>
@@ -410,16 +410,27 @@ export default function Home(props) {
                           >
                             Delete Task List
                           </button>
-
+                          <button
+                            onClick={async () => {
+                              await generateRecommendations(
+                                taskList.name,
+                                taskList?.tasks ?? []
+                              );
+                            }}
+                            type="submit"
+                          >
+                            Generate Recommendations
+                          </button>
                           {(taskList?.tasks ?? []).map((listitem) => (
                             <div className={styles.taskResult}>
-                              {"Task: " + 
-                              listitem.description +
+                              {"Task: " +
+                                listitem.description +
                                 ", " +
                                 listitem.priority +
                                 ", " +
                                 listitem.duration}
-                              <button className={styles.resultButton}
+                              <button
+                                className={styles.resultButton}
                                 onClick={async () => {
                                   await deleteTask(listitem.id);
                                 }}
@@ -435,10 +446,9 @@ export default function Home(props) {
                   })}
                 </div>
               </div>
-              <div className={styles.response}>
-                <div className={styles.responsewrapper}>
-                  {response}</div>{" "}
-                  </div>
+              {hasRecommendationBeenGenerated && (
+                <div className={styles.response}>{response}</div>
+              )}
             </>
           )}
         </div>

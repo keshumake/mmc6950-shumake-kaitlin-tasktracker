@@ -7,6 +7,11 @@ export async function create(username, password) {
   if (!connection) {
     createConnection();
   }
+  const usernameResults = await connection.execute(
+    `SELECT * FROM User WHERE username=?`,
+    [username]
+  );
+  if (usernameResults.rows.length !== 0) throw new Error("User already exists");
   const passwordHash = await hash(password, 10);
   await connection.execute(
     `INSERT INTO User (username, password) VALUES (?, ?)`,
