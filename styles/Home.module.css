@@ -79,6 +79,7 @@
   flex-direction: row;
   align-items: center;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .labels {
@@ -102,9 +103,7 @@
 .createTaskList input,
 .createTask input {
   border: 2px black solid;
-  padding-right: 10px;
-  margin-left: 15px;
-}
+margin: 10px;}
 
 .createTask {
   width: 100%;
@@ -117,7 +116,7 @@
 }
 
 .createTask button {
-  margin-left: 10px;
+  margin: 10px;
 }
 
 .taskContainer {
