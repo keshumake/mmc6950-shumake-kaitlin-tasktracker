@@ -220,6 +220,7 @@ export default function Home(props) {
                     value={taskListName}
                     autoFocus={true}
                     onChange={(e) => setTaskListName(e.target.value)}
+                    placeholder="Things to Do"
                   />
 
                   <button
@@ -238,11 +239,6 @@ export default function Home(props) {
                   the appropriate fields: Task Name, Priority level -- HIGH,
                   MEDIUM, LOW, NONE -- and time needed in minutes.
                 </p>
-                <div className={styles.labels}>
-                  <h1>Task Name</h1>
-                  <h1>Priority Level</h1>
-                  <h1>Duration Needed</h1>
-                </div>
                 <div className={styles.createTask}>
                   <label>Create Task:</label>
                   <input
@@ -250,18 +246,21 @@ export default function Home(props) {
                     value={description1}
                     autoFocus={true}
                     onChange={(e) => setDescription1(e.target.value)}
+                    placeholder="doing dishes"
                   />
                   <input
                     type="text"
                     value={priority1}
                     autoFocus={true}
                     onChange={(e) => setPriority1(e.target.value)}
+                    placeholder="medium"
                   />
                   <input
                     type="number"
                     value={duration1}
                     autoFocus={true}
                     onChange={(e) => setDuration1(e.target.value)}
+                    placeholder="60"
                   />
 
                   <button
@@ -272,7 +271,7 @@ export default function Home(props) {
                   >
                     Create Task
                   </button>
-                </div>
+                  </div>
                 <div className={styles.createTask}>
                   <label>Create Task:</label>
                   <input
@@ -393,6 +392,7 @@ export default function Home(props) {
                     Create Task
                   </button>
                 </div>
+                
 
                 <div className={styles.recommendations}>
                 </div>
