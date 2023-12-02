@@ -58,10 +58,9 @@
   text-align: center;
 }
 .createTaskList {
-  padding: 50px;
   display: flex;
   flex-direction: column;
-  width: 75%;
+  padding-bottom: 20px;
 }
 
 .submitTaskList {
@@ -131,6 +130,9 @@
   font-size: 18px;
   padding: 50px;
   font-family: "Bitter", serif;
+}
+
+.responsewrapper {
   border: 10px solid #188c8c;
 }
 

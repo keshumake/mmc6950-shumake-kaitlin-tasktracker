@@ -435,7 +435,10 @@ export default function Home(props) {
                   })}
                 </div>
               </div>
-              <div className={styles.response}>{response}</div>{" "}
+              <div className={styles.response}>
+                <div className={styles.responsewrapper}>
+                  {response}</div>{" "}
+                  </div>
             </>
           )}
         </div>
