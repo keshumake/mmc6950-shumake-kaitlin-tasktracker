@@ -1,4 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Arimo&family=Bitter&display=swap");
+@media screen and (max-width: 400px) {
+  .createtask {
+    display: flex;
+    flex-direction: column;
+  }
+}
 
 .main {
   position: relative;
@@ -72,7 +78,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .labels {
@@ -107,6 +113,7 @@
   justify-content: center;
   align-items: center;
   padding-bottom: 10px;
+  flex-wrap: wrap;
 }
 
 .createTask button {
@@ -157,11 +164,4 @@
 
 .resultButton {
   padding-left: 20px;
-}
-
-@media screen and (max-width: 600px) {
-  .taskContainer {
-    display: flex;
-    flex-direction: column;
-  }
 }
