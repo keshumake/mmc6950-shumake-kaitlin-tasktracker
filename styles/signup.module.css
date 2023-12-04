@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Arimo&family=Bitter&display=swap");
 
-.main, .maincontent {
+.main,
+.maincontent {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -8,7 +9,6 @@
   padding: 6rem;
   min-height: 75vh;
 }
-
 
 .imgwrapper {
   height: 100%;
@@ -44,4 +44,8 @@
   font-family: "Bitter", serif;
   padding: 5px 10px;
   font-size: 16px;
+}
+
+.main button:hover {
+  background-color: #188c8c;
 }
