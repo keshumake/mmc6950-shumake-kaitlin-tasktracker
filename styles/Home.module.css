@@ -163,3 +163,7 @@
 .resultButton {
   padding-left: 20px;
 }
+
+.taskListResult button {
+  margin-top: 15px;
+}
