@@ -22,10 +22,8 @@
   padding-bottom: 10px;
 }
 
-.headerimg {
-  position: relative;
-  width: 100%;
-  height: 75vh;
+img {
+  height: 100%;
 }
 
 .imgwrapper {
@@ -103,7 +101,8 @@
 .createTaskList input,
 .createTask input {
   border: 2px black solid;
-margin: 10px;}
+  margin: 10px;
+}
 
 .createTask {
   width: 100%;
