@@ -11,6 +11,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 
 
+
 export const getServerSideProps = withIronSessionSsr(
   async function getServerSideProps({ req }) {
     const user = req.session.user;
@@ -47,6 +48,7 @@ export default function Home(props) {
   const [priority5, setPriority5] = useState("");
   const [duration5, setDuration5] = useState("");
   const [taskLists, setTaskLists] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [tasks, setTasks] = useState([]);
   const [hasRecommendationBeenGenerated, setHasRecommendationBeenGenerated] =
     useState(false);
@@ -73,6 +75,7 @@ export default function Home(props) {
     listName = taskListName,
     tasksArr = tasks
   ) => {
+    setIsLoading(true);
     setHasRecommendationBeenGenerated(true);
     const tasksString = tasksArr
       .map((t) => `${t.description}, ${t.priority}, ${t.duration}`)
@@ -90,6 +93,7 @@ export default function Home(props) {
     if (res.status !== 200) return;
     const data = await res.json();
     setResponse(data.response);
+    setIsLoading(false);
   };
 
   const createTask = async (description, priority, duration) => {
@@ -155,7 +159,7 @@ export default function Home(props) {
     await getTaskLists();
     setResponse(data.response);
   };
-
+  console.log(isLoading);
   return (
     <>
       <Menu right>
@@ -447,7 +451,7 @@ export default function Home(props) {
                 </div>
               </div>
               {hasRecommendationBeenGenerated && (
-                <div className={styles.response}>{response}</div>
+                <div className={styles.response}>{isLoading ? "Loading..." : response}</div>
               )}
             </>
           )}
